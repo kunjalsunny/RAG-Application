@@ -8,9 +8,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
+ # 1. Loading the files from docs folder
 def load_documents(docs_path="docs"):
     
-    # 1. Loading the files from docs folder
+   
     print(f"Loading the documents from {docs_path}")
 
     if not os.path.exists(docs_path):
@@ -32,7 +34,7 @@ def load_documents(docs_path="docs"):
 
     return docs
 
-    # 2. Chunking the files
+# 2. Chunking the files
 def split_documents(documents, chunk_size=900, chunk_overlap=0):
     print(f"Splitting the documents into chunks...")
 
@@ -53,7 +55,7 @@ def split_documents(documents, chunk_size=900, chunk_overlap=0):
     
     return chunks
 
-    # 3. Embedding and Storing in VectorDB
+# 3. Embedding and Storing in VectorDB
 def create_vector_store(chunks, persist_directory="db/chromadb"):
     print(f"Create embedding and storing in chromaDB")
 
@@ -71,12 +73,15 @@ def create_vector_store(chunks, persist_directory="db/chromadb"):
 
     return vectorstore
 
-
-if __name__ == "__main__":
+def main():
     #1
     documents = load_documents(docs_path='docs')
-    
+
     #2
     chunks = split_documents(documents)
 
     #3
+    vectorstore = create_vector_store(chunks)
+
+if __name__ == "__main__":
+    main()
